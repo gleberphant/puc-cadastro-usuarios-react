@@ -1,28 +1,42 @@
-import {useState} from 'react';
-import logo from './assets/images/logo-universal.png';
-import './App.css';
-import {Greet} from "../wailsjs/go/main/App";
+import "./estilos/App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ChecarAutenticacao } from "./servicos/autenticacao";
+import { useEffect, useState } from "react";
+import Layout from "./paginas/_layout";
+import PageLogin from "./paginas/login";
+import PageHome from "./paginas/home";
+import PageCadastro from "./paginas/cadastro";
+import PageSobre from "./paginas/sobre";
 
+//roteador da aplicação
 function App() {
-    const [resultText, setResultText] = useState("Please enter your name below 👇");
-    const [name, setName] = useState('');
-    const updateName = (e) => setName(e.target.value);
-    const updateResultText = (result) => setResultText(result);
+  const [autenticado, setAutenticado] = useState(ChecarAutenticacao());
 
-    function greet() {
-        Greet(name).then(updateResultText);
-    }
+  useEffect(() => {
+    setAutenticado(ChecarAutenticacao());
+  }, []);
+  
 
+  if (!autenticado)
     return (
-        <div id="App">
-            <img src={logo} id="logo" alt="logo"/>
-            <div id="result" className="result">{resultText}</div>
-            <div id="input" className="input-box">
-                <input id="name" className="input" onChange={updateName} autoComplete="off" name="input" type="text"/>
-                <button className="btn" onClick={greet}>Greet</button>
-            </div>
-        </div>
-    )
+      <>
+        <PageLogin setLogado={setAutenticado} />
+      </>
+    );
+  else
+    return (
+      <>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route index element={<PageHome />} />
+              <Route path="/cadastro" element={<PageCadastro />} />
+              <Route path="/sobre" element={<PageSobre />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </>
+    );
 }
 
-export default App
+export default App;
