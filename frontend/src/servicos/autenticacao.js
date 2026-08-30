@@ -1,4 +1,8 @@
-import { ChecarSenha, ChecarUsuario, SelecionarUsuarioPorLogin } from "./usuarios";
+import {
+  ChecarSenha,
+  ChecarUsuario,
+  SelecionarUsuarioPorLogin,
+} from "./usuarios";
 
 let USUARIO_AUTENTICADO = {};
 
@@ -16,12 +20,10 @@ export function FazerLogin(login, senha) {
     return "senha inválida";
   }
 
-
   localStorage.setItem("token", "token");
 
-  const usuarioLogado= SelecionarUsuarioPorLogin(login)
-  console.log(usuarioLogado)
-  setUsuarioAutenticado(usuarioLogado);
+  USUARIO_AUTENTICADO = SelecionarUsuarioPorLogin(login);
+  console.log(USUARIO_AUTENTICADO);
 
   return null;
 }
@@ -33,20 +35,14 @@ export function FazerLogout() {
 
 export function ChecarAutenticacao() {
   if (localStorage.getItem("token") == null) return false;
-  else return true
-
+  else return true;
 }
 
-export function GetUsuarioAutenticado(){
-  return USUARIO_AUTENTICADO
+export function GetUsuarioAutenticado() {
+  return USUARIO_AUTENTICADO;
 }
 
 // metodos privados
-
-function setUsuarioAutenticado(valor) {
-  USUARIO_AUTENTICADO = valor;
-}
-
 function criptograrSenha(senha) {
   return senha;
 }

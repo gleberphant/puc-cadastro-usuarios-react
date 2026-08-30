@@ -10,6 +10,8 @@ import PageSobre from "./paginas/sobre";
 
 //roteador da aplicação
 function App() {
+  // app passa callbackSetAutenticado para que quando ocorrer a autenticacao o componente ser
+  // renderizado novamente
   const [autenticado, setAutenticado] = useState(ChecarAutenticacao());
 
   useEffect(() => {
@@ -20,7 +22,7 @@ function App() {
   if (!autenticado)
     return (
       <>
-        <PageLogin setLogado={setAutenticado} />
+        <PageLogin callbackSetAutenticado={setAutenticado} />
       </>
     );
   else

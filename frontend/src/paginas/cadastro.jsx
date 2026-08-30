@@ -6,30 +6,51 @@
 //  o UID do usuário para os atributos no Firestore.
 
 import "../estilos/CadastroPage.css";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../repositorios/firebase";
 
 export default function PageCadastro() {
-  const enviarFormulario = (e) => {
+  const enviarFormulario = async (e) => {
     e.preventDefault();
 
-    formulario = new FormData(e.currentTarget);
+    const formulario = new FormData(e.currentTarget);
+
+    const novoUsuario = {
+      nome: formulario.get("nome"),
+      sobrenome: formulario.get("sobrenome"),
+      login: formulario.get("login"),
+      senha: formulario.get("senha"),
+      data_nascimento: formulario.get("data_nascimento"),
+    };
+
+    try {
+      const docRef = await addDoc(collection(db, "usuarios"), novoUsuario);
+      console.log(`Documento salvo : ${docRef.id}`);
+    } catch (error) {
+      console.log(`Falha na escrita do error: ${erro}`);
+    }
   };
 
   return (
     <>
       <div className="cadastro-page">
         <div className="cadastro-panel">
-          
           <h2>PAGINA DE CADASTRO DE NOVO USUARIO</h2>
 
           <form className="cadastro-form" onSubmit={enviarFormulario}>
             <div className="cadastro-field">
               <label htmlFor="login">Login</label>
-              <input id="login" name="login" type="text" />
+              <input id="login" name="login" type="text" placeholder="login" />
             </div>
 
             <div className="cadastro-field">
               <label htmlFor="senha">Senha</label>
-              <input id="senha" name="senha" type="password" />
+              <input
+                id="senha"
+                name="senha"
+                type="password"
+                placeholder="senha"
+              />
             </div>
 
             <div className="cadastro-field">
@@ -48,7 +69,7 @@ export default function PageCadastro() {
             </div>
 
             <button type="submit" className="cadastro-button">
-              Entrar
+              SALVAR
             </button>
           </form>
         </div>

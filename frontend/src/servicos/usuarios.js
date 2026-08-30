@@ -33,9 +33,14 @@ let USUARIO_MOCK = [
   },
 ];
 
+
 export function ListarUsuarios() {
+
+
+  
   return USUARIO_MOCK;
 }
+
 
 export function AdicionarUsuario({ nome, login, senha }) {
   const proximoID = USUARIO_MOCK.findLast().id + 1;
