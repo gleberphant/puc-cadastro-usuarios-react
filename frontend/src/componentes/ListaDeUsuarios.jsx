@@ -1,40 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ListarUsuarios } from "../servicos/usuarios.js";
-import { db } from "../repositorios/firebase.js";
-import { collection, getDocs } from "firebase/firestore"
 export function ListaDeUsuarios() {
+  const [loading, setLoading] = useState(false)
   const [listaUsuarios, setListaUsuarios] = useState([]);
 
-  const getLista = async () => {
-    const lista = []
-    const querySnapshot = await getDocs(collection(db, "usuarios"));
-    querySnapshot.forEach((doc) => {
-      lista.push(doc)
-      console.log(`${doc.id} => ${doc.data()}`);
-    });
-    return lista
+  const carregarUsuarios = async () => {
+    setLoading(true)
+    const lista = await ListarUsuarios();
+    setListaUsuarios(lista);
+    setLoading(false)
   };
 
-  setListaUsuarios(getLista());
 
-  return (
+  useEffect(() => { carregarUsuarios()}  , []);
+
+  return loading? <h2>Carregando</h2> :(
     <>
-      <div>
-        <div style={{ color: "black" }}>
-          <button onClick={getLista}>click</button>
-          <table>
-            <tbody>
-              {listaUsuarios.map((u) => (
-                <tr key={u.login}>
-                  <td> Nome :{u.nome}</td>
-                  <td> Sobrenome :{u.sobrenome}</td>
-                  <td> Login :{u.login}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <h2>lista de usuarios</h2>
+      <table>
+        <thead>
+          <tr>
+            <td>Login</td>
+            <td>Nome</td>
+            <td>Sobrenome</td>
+            <td>Data de Nascimento</td>
+          </tr>
+        </thead>
+        <tbody>
+          {listaUsuarios.map((u) => (
+            <tr key={u.id}>
+              <td> {u.login}</td>
+              <td> {u.nome}</td>
+              <td> {u.sobrenome}</td>
+              <td> {u.data_nascimento}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
-  );
+  ) 
 }

@@ -6,8 +6,7 @@
 //  o UID do usuário para os atributos no Firestore.
 
 import "../estilos/CadastroPage.css";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../repositorios/firebase";
+import { AdicionarUsuario } from "../servicos/usuarios";
 
 export default function PageCadastro() {
   const enviarFormulario = async (e) => {
@@ -23,12 +22,9 @@ export default function PageCadastro() {
       data_nascimento: formulario.get("data_nascimento"),
     };
 
-    try {
-      const docRef = await addDoc(collection(db, "usuarios"), novoUsuario);
-      console.log(`Documento salvo : ${docRef.id}`);
-    } catch (error) {
-      console.log(`Falha na escrita do error: ${erro}`);
-    }
+    await AdicionarUsuario(novoUsuario);
+
+    e.currentTarget.reset();
   };
 
   return (
