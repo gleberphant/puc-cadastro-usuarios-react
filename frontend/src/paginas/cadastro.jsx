@@ -12,7 +12,8 @@ export default function PageCadastro() {
   const enviarFormulario = async (e) => {
     e.preventDefault();
 
-    const formulario = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formulario = new FormData(form);
 
     const novoUsuario = {
       nome: formulario.get("nome"),
@@ -24,7 +25,7 @@ export default function PageCadastro() {
 
     await AdicionarUsuario(novoUsuario);
 
-    e.currentTarget.reset();
+    form.reset();
   };
 
   return (

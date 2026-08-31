@@ -6,25 +6,19 @@ import {
 
 let USUARIO_AUTENTICADO = {};
 
-export function FazerLogin(login, senha) {
-  // verifica se o usuario existe
-  if (!ChecarUsuario(login)) {
+export async function FazerLogin(login, senha) {
+  if (!(await ChecarUsuario(login))) {
     return "usuario não identificado";
   }
 
-  // simula criptografia da senha
   const senhaCriptografada = criptograrSenha(senha);
 
-  // checar se a senha é correta
-  if (!ChecarSenha(login, senhaCriptografada)) {
+  if (!(await ChecarSenha(login, senhaCriptografada))) {
     return "senha inválida";
   }
 
   localStorage.setItem("token", "token");
-
-  USUARIO_AUTENTICADO = SelecionarUsuarioPorLogin(login);
-  console.log(USUARIO_AUTENTICADO);
-
+  USUARIO_AUTENTICADO = await SelecionarUsuarioPorLogin(login);
   return null;
 }
 

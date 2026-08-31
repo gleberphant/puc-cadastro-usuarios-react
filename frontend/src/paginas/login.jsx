@@ -6,18 +6,19 @@ import { FazerLogin } from "../servicos/autenticacao";
 export default function PageLogin({ callbackSetAutenticado }) {
   //  const navegarPara = useNavigate()
 
-  const enviarFormulario = (e) => {
+  const enviarFormulario =  async (e) => {
     e.preventDefault();
 
     const formulario = new FormData(e.target);
     const login = formulario.get("login");
     const senha = formulario.get("senha");
 
-    const resultado = FazerLogin(login, senha);
+    const err = await FazerLogin(login, senha);
     console.log(`Login:${login} Senha ${senha} `);
 
-    if (resultado != null) {
-      alert(`Erro: ${resultado}`);
+    if (err != null) {
+      alert(`Erro: ${err}`);
+      return null
     }
 
     callbackSetAutenticado(true);
