@@ -1,0 +1,72 @@
+<div align="center">
+
+![LOGOPUC](https://www.pucpr.br/wp-content/themes/pucpr/_assets/images/logo-pucpr-vermelha.svg)
+
+![Static Badge](https://img.shields.io/badge/go-repo-blue?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
+
+Desenvolvido por HANDERSON GLEBER (gr4v4t1nh4) 
+
+
+<p align="center">Gostou do projeto? Por favor considere <a href="http://link.mercadopago.com.br/handersongleber">fazer uma doação</a> para ajudar a melhorá-lo!</p>
+
+</div>
+
+
+
+## 🐙 Descrição
+
+Atividades práticas da disciplina de `Dev Ops e de Desenvolvimento WEB`, do curso de Análise e Desenvolvimento de Sistemas da PUC PR. 
+
+## 💻 Pré-requisitos
+
+Antes de começar, verifique os requisitos do projeto:
+
+- `Golang 1.26.6`
+- `Node 1.24`
+
+## 🚀 Instalação do projeto
+
+
+### Live Development
+
+To run in live development mode, run `wails dev` in the project directory. This will run a Vite development server that will provide very fast hot reload of your frontend changes. If you want to develop in a browser and have access to your Go methods, there is also a dev server that runs on http://localhost:34115. Connect to this in your browser, and you can call your Go code from devtools.
+
+### Building
+
+To build a redistributable, production mode package, use `wails build`.
+
+## 📫 Contribuindo com o projeto
+
+Para contribuir com o projeto, siga estas etapas:
+
+1. Bifurque este repositório.
+2. Crie um branch: `git checkout -b <nome_branch>`.
+3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
+4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
+5. Crie a solicitação de pull.
+
+Consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
+## 😄 Autor
+
+HANDERSON GLEBER DE LIMA CAVALCANTI (GRAVATINHA)
+
+E- mail:  handerson.gleber@gmail.com
+
+https://www.instagram.com/handersongleber/
+
+## 📝 Licença
+
+Esse projeto está sob licença livre.
+
+## 🤝 Apoie o autor
+
+Se você estiver satisfeito com esse projeto ou  quiser me encorajar a continuar criando coisas legais, considere me apoiar:
+
+- Dando os devidos créditos caso utilize meu código
+- Dando uma estrela (Starring) e compartilhando o projeto 🚀
+- Me Pagando um café [![Static Badge](https://img.shields.io/badge/Mercado_Livre-blue)]("http://link.mercadopago.com.br/handersongleber") ou  [![paypal](https://img.shields.io/badge/Pay_Pal-blue)]("https://www.paypal.com/donate/?business=GZCPGEVTCZ8VW&no_recurring=0&currency_code=USD")
+
+
