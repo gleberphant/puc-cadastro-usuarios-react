@@ -2,7 +2,7 @@ import "./estilos/App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ChecarAutenticacao } from "./servicos/autenticacao";
 import { useEffect, useState } from "react";
-import Layout from "./paginas/_layout";
+import Layout from "./paginas/layout";
 import PageLogin from "./paginas/login";
 import PageHome from "./paginas/home";
 import PageCadastro from "./paginas/cadastro";

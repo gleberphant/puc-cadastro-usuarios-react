@@ -25,7 +25,7 @@ export default function PageCadastro() {
 
     await AdicionarUsuario(novoUsuario);
 
-    form.reset();
+    //form.reset();
   };
 
   return (

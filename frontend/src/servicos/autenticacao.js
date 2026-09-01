@@ -4,22 +4,24 @@ import {
   SelecionarUsuarioPorLogin,
 } from "./usuarios";
 
+import { auth } from "../repositorios/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 let USUARIO_AUTENTICADO = {};
-
+// faz login, se não conseguir retorna um erro explicando a falha
 export async function FazerLogin(login, senha) {
-  if (!(await ChecarUsuario(login))) {
-    return "usuario não identificado";
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, login, senha);
+    const user = userCredential.user;
+    console.log("Usuário logado:", user.uid);
+
+    localStorage.setItem("token", user.uid);
+    USUARIO_AUTENTICADO = await SelecionarUsuarioPorLogin(login);
+    return null;
+  } catch (error) {
+    console.error("Erro no login:", error.code, error.message);
+    return error.message;
   }
-
-  const senhaCriptografada = criptograrSenha(senha);
-
-  if (!(await ChecarSenha(login, senhaCriptografada))) {
-    return "senha inválida";
-  }
-
-  localStorage.setItem("token", "token");
-  USUARIO_AUTENTICADO = await SelecionarUsuarioPorLogin(login);
-  return null;
 }
 
 export function FazerLogout() {

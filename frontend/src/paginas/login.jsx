@@ -13,8 +13,9 @@ export default function PageLogin({ callbackSetAutenticado }) {
     const login = formulario.get("login");
     const senha = formulario.get("senha");
 
-    const err = await FazerLogin(login, senha);
-    console.log(`Login:${login} Senha ${senha} `);
+    console.log(`Fazendo login com: Login:${login} Senha ${senha} `);
+    
+    const err = await FazerLogin(login, senha);  
 
     if (err != null) {
       alert(`Erro: ${err}`);
