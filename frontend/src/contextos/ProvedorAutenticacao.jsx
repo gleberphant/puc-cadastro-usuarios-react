@@ -20,26 +20,45 @@ export function ProvedorAutenticacao({ children }) {
     const callbackLimpezaListener = onAuthStateChanged(
       auth,
       async (usuarioFirebase) => {
-        if (!usuarioFirebase) {
-          setUsuarioLogado(null);
-        } else {
+        console.log("onAuthStateChanged Firebase executado:", usuarioFirebase?true:false);
+
+        try {
+          if (!usuarioFirebase) {
+            setUsuarioLogado(null);
+            return;
+          }
+
+          console.log("Buscando dados do usuário:", usuarioFirebase.uid);
 
           const usuario = await SelecionarUsuarioPorId(usuarioFirebase.uid);
+
+          if (!usuario) {
+            setUsuarioLogado(null);
+            return;
+          }
+
           
-          setUsuarioLogado({
+
+          await setUsuarioLogado({
             uid: usuarioFirebase.uid,
             login: usuario.login,
             nome: usuario.nome,
             sobrenome: usuario.sobrenome,
           });
+
+          console.log("Usuário no State:", usuarioLogado);
+
+        } catch (erro) {
+          console.error("Erro ao recuperar autenticação:", erro);
+          setUsuarioLogado(null);
+        } finally {
+          setLoading(false);
+          console.log("Finalizando loading", loading);
+          
         }
-
-        console.log("Usuario recebido pelo firebase", usuarioLogado);
-
-        setLoading(false);
       },
     );
-    
+
     //a função retornada pelo efeito é a função de limpeza, executada pelo React quando o efeito precisa ser encerrado.
     return () => {
       console.log("Removendo listener");
@@ -50,10 +69,11 @@ export function ProvedorAutenticacao({ children }) {
   const FazerLogin = async (email, senha) => {
     try {
       await signInWithEmailAndPassword(auth, email, senha);
+      console.log("signInWithEmailAndPassword: ", email);
       return null;
-    } catch (erro)  {
-      console.error("Erro ao fazer login:", erro);
-      return "Autenticação inválida";
+    } catch (erro) {
+      console.error("signInWithEmailAndPassword:", erro);
+      throw new Error("erro na autenticação");
     }
   };
 

@@ -2,7 +2,6 @@ import {
   query,
   collection,
   getDocs,
-  addDoc,
   doc,
   getDoc,
   where,
@@ -10,7 +9,7 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../repositorios/firebase.js";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { USUARIO_MOCK } from "../repositorios/mock.js";
+
 
 export async function ListarUsuarios() {
   const lista = [];

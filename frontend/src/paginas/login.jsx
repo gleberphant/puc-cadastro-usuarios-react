@@ -3,13 +3,14 @@ import "../estilos/LoginPage.css";
 import pucprSimbolo from "../assets/images/pucpr-simbolo2.png";
 
 //dependencias
+import {useEffect} from "react"
 import { useNavigate } from "react-router-dom";
 import { useContextoAutenticacao } from "../contextos/ProvedorAutenticacao";
 
 //componentes
 export default function PageLogin() {
   const navegarPara = useNavigate();
-  const { FazerLogin } = useContextoAutenticacao();
+  const { FazerLogin, usuarioLogado } = useContextoAutenticacao();
 
   const enviarFormulario = async (e) => {
     e.preventDefault();
@@ -18,15 +19,21 @@ export default function PageLogin() {
     const login = formulario.get("login");
     const senha = formulario.get("senha");
 
-    const err = await FazerLogin(login, senha);
-
-    if (err != null) {
+    try {
+      await FazerLogin(login, senha);
+    } catch (err) {
       alert(`Erro: ${err}`);
       return null;
     }
-
-    navegarPara("/");
   };
+
+  useEffect(() => {
+
+    console.log("usuarioLogado: ", usuarioLogado)
+    if (usuarioLogado) {
+      navegarPara("/", { replace: true });
+    }
+  }, [usuarioLogado, navegarPara]);
 
   return (
     <div className="login-page">
