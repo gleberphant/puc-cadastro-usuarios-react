@@ -1,0 +1,34 @@
+.perfil-container {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 1000;
+}
+
+.card-usuario-logado {
+  min-width: 220px;
+  padding: 16px;
+  color: black;
+  background-color: white;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-usuario-logado h2 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+.card-usuario-logado table {
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.card-usuario-logado td {
+  padding: 4px 8px;
+}
+
+.card-usuario-logado td:first-child {
+  font-weight: bold;
+}

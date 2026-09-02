@@ -1,45 +1,68 @@
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  display: "flex";
-  /* gap: "20px"; */
-}
-ul li {
-  float: left;
-  margin-right: 20px;
-  
-}
-
-ul li img {
- 
-  margin-left: 10px;
-  margin-right: 6px;
-  margin-bottom: 2px;
-}
-
-ul li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-ul li a:hover {
-  background-color: #111111;
-}
-
-ul li a.active {
-  background-color: #8a0538;;
-}
-
 main {
-  padding: "20px 0";
+  padding: 2px 0;
 }
 
 footer {
-  text-align: "center";
-  padding: "16px 0";
+  padding: 16px 0;
+  text-align: center;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 40px;
+  padding: 2px 4px 2px 2px;
+  box-sizing: border-box;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar-links li {
+  margin: 0;
+}
+
+.navbar-links img {
+  display: block;
+  margin: 6px 6px 0 6px;
+}
+
+.navbar-links a,
+.navbar-links button,
+.perfil-menu button {
+  display: block;
+  padding: 14px 16px;
+  border: 0;
+  color: white;
+  background-color: transparent;
+  font: inherit;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar-links a:hover,
+.navbar-links button:hover,
+.perfil-menu button:hover {
+  color: white;
+  background-color: black;
+}
+
+.navbar-links a.active,
+.navbar-links button.active,
+.perfil-menu button.ativo {
+  color: white;
+  background-color: crimson;
+}
+
+.perfil-menu {
+  position: relative;
+  margin-left: auto;
 }
