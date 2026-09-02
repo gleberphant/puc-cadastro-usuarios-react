@@ -8,6 +8,7 @@ import PageHome from "./paginas/home";
 import PageCadastro from "./paginas/cadastro";
 import PageSobre from "./paginas/sobre";
 
+
 //roteador da aplicação
 function App() {
   // app passa callbackSetAutenticado para que quando ocorrer a autenticacao o componente ser
