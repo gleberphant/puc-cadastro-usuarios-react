@@ -18,14 +18,13 @@ export async function ListarUsuarios() {
   try {
     const resultado = await getDocs(collection(db, "usuarios"));
     // timeout para simular delay do servidor
-    const sleep = await new Promise((resolve) => setTimeout(resolve, 500));
+    //const sleep = await new Promise((resolve) => setTimeout(resolve, 500));
 
     for (const doc of resultado.docs) {
       const usuario = { id: doc.id, ...doc.data() };
-      console.log("Usuario recebido: ", usuario);
       lista.push(usuario);
     }
-    console.log("Recebendo lista de usuarios: ", lista);
+    console.log("lista : ", lista);
   } catch (e) {
     console.log("error:", e);
     return null;
@@ -35,9 +34,6 @@ export async function ListarUsuarios() {
 }
 
 export async function AdicionarUsuario(novoUsuario) {
-
-
-
   try {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
@@ -46,26 +42,21 @@ export async function AdicionarUsuario(novoUsuario) {
     );
     console.log("Usuario criado no firebase auth: ", userCredential.user.uid);
 
-    const docRef = doc(db, "usuarios", userCredential.user.uid)
-    
+    const docRef = doc(db, "usuarios", userCredential.user.uid);
+
     await setDoc(docRef, novoUsuario);
 
     console.log(`Documento salvo : ${docRef.id}`);
-
   } catch (error) {
     console.log(`Error: ${error}`);
     return error;
   }
 
-
   try {
-    
   } catch (error) {
     console.log(`Error: ${error}`);
     return "erro ao adicionar usuario";
   }
-
-
 
   return null;
 }

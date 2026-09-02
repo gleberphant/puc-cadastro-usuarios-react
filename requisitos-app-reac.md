@@ -10,6 +10,6 @@
  ### Página 3 (Principal):
  > Deverá trazer os dados do usuário como: nome, sobrenome e data de nascimento e informá-las na tela.  
 
-Deverá fazer o build e deploy do projeto e hospedar em um ambiente nuvem em que qualquer pessoa possa acessá-lo. 
+### Deverá fazer o build e deploy do projeto e hospedar em um ambiente nuvem em que qualquer pessoa possa acessá-lo. 
 
-Realizar a entrega no formato ZIP, com todo o código do projeto da forma com que foi feito, mas exclua a pasta node_modules na hora de entregar (ela sozinha tem em torno de 500 MB e será recriada com o comando npm init.
+Realizar a entrega no formato ZIP, com todo o código do projeto da forma com que foi feito, mas exclua a pasta node_modules na hora de entregar ela sozinha tem em torno de 500 MB e será recriada com o comando npm init.

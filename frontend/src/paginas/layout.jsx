@@ -1,16 +1,22 @@
-import { NavLink, Outlet } from "react-router-dom";
-import { FazerLogout } from "../servicos/autenticacao";
 import "../estilos/Layout.css";
-import PUCBRASAO from "../assets/images/pucpr-brasao-redondo.png"
+import { NavLink, Outlet } from "react-router-dom";
+import { useState } from "react";
+
+import PUCBRASAO from "../assets/images/pucpr-brasao-redondo.png";
+import { useContextoAutenticacao } from "../contextos/ProvedorAutenticacao";
+import { CardUsuarioLogado } from "../componentes/CardUsuarioLogado";
 
 export default function Layout() {
+  const { FazerLogout, usuarioLogado } = useContextoAutenticacao();
+  const [verCardPerfil, setVerCardPerfil] = useState(false);
+
   return (
     <>
       <header>
-        <nav>
-          <ul>
+        <nav className="navbar">
+          <ul className="navbar-links">
             <li>
-              <img height="50" src={PUCBRASAO}/>
+              <img height="50" src={PUCBRASAO} />
             </li>
             <li>
               <NavLink to="/">HOME</NavLink>
@@ -22,9 +28,27 @@ export default function Layout() {
               <NavLink to="/sobre">SOBRE</NavLink>
             </li>
             <li>
-              <a onClick={ FazerLogout }>SAIR</a>
+              <button type="button" onClick={FazerLogout}>
+                SAIR
+              </button>
             </li>
           </ul>
+
+          <div className="perfil-menu">
+            <button
+              type="button"
+              className={verCardPerfil ? "ativo" : ""}
+              onClick={() => setVerCardPerfil(!verCardPerfil)}
+            >
+              Perfil
+            </button>
+
+            {verCardPerfil ? (
+              <CardUsuarioLogado usuarioLogado={usuarioLogado} />
+            ) : (
+              <></>
+            )}
+          </div>
         </nav>
       </header>
 

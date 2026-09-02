@@ -1,37 +1,29 @@
-import { GetUsuarioAutenticado } from "../servicos/autenticacao";
-export function CardUsuarioLogado() {
-  const [usuarioAutenticado] = useState(GetUsuarioAutenticado());
-  const dataFormatada = usuarioAutenticado?.data_nascimento
-    ? new Date(usuarioAutenticado.data_nascimento).toLocaleDateString("pt-BR")
-    : "";
-  return (
-    <>
-      <div className="home-panel">
-        <h2>USUARIO LOGADO</h2>
+import { useState } from "react";
+import "../estilos/CardUsuarioLogado.css";
 
-        <table className="home-table">
+export function CardUsuarioLogado({ usuarioLogado }) {
+  return (
+    <div className="perfil-container">
+      <div className="card-usuario-logado">
+        <h2>USUÁRIO </h2>
+
+        <table>
           <tbody>
             <tr>
-              <td className="home-label">Nome:</td>
-              <td className="home-value">{usuarioAutenticado?.nome ?? ""}</td>
+              <td>Nome:</td>
+              <td>{usuarioLogado?.nome ?? ""}</td>
             </tr>
             <tr>
-              <td className="home-label">Sobrenome:</td>
-              <td className="home-value">
-                {usuarioAutenticado?.sobrenome ?? ""}
-              </td>
+              <td>Sobrenome:</td>
+              <td>{usuarioLogado?.sobrenome ?? ""}</td>
             </tr>
             <tr>
-              <td className="home-label">Data de Nascimento:</td>
-              <td className="home-value">{dataFormatada}</td>
-            </tr>
-            <tr>
-              <td className="home-label">Login:</td>
-              <td className="home-value">{usuarioAutenticado?.login ?? ""}</td>
+              <td>Login:</td>
+              <td>{usuarioLogado?.login ?? ""}</td>
             </tr>
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }
