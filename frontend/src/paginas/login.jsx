@@ -1,12 +1,17 @@
+//estilos
 import "../estilos/LoginPage.css";
 import pucprSimbolo from "../assets/images/pucpr-simbolo2.png";
-import { FazerLogin } from "../servicos/autenticacao";
 
-// import { useNavigate } from "react-router-dom";
-export default function PageLogin({ callbackSetAutenticado }) {
-  //  const navegarPara = useNavigate()
+//dependencias
+import { useNavigate } from "react-router-dom";
+import { useContextoAutenticacao } from "../contextos/ProvedorAutenticacao";
 
-  const enviarFormulario =  async (e) => {
+//componentes
+export default function PageLogin() {
+  const navegarPara = useNavigate();
+  const { FazerLogin } = useContextoAutenticacao();
+
+  const enviarFormulario = async (e) => {
     e.preventDefault();
 
     const formulario = new FormData(e.target);
@@ -14,14 +19,13 @@ export default function PageLogin({ callbackSetAutenticado }) {
     const senha = formulario.get("senha");
 
     const err = await FazerLogin(login, senha);
-    console.log(`Login:${login} Senha ${senha} `);
 
     if (err != null) {
       alert(`Erro: ${err}`);
-      return null
+      return null;
     }
 
-    callbackSetAutenticado(true);
+    navegarPara("/");
   };
 
   return (

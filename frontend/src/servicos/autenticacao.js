@@ -1,42 +1,42 @@
-import {
-  ChecarSenha,
-  ChecarUsuario,
-  SelecionarUsuarioPorLogin,
-} from "./usuarios";
+// import {
+//   SelecionarUsuarioPorLogin,
+// } from "./usuarios";
 
-let USUARIO_AUTENTICADO = {};
+// import { auth } from "../repositorios/firebase";
+// import { signInWithEmailAndPassword } from "firebase/auth";
 
-export async function FazerLogin(login, senha) {
-  if (!(await ChecarUsuario(login))) {
-    return "usuario não identificado";
-  }
+// let USUARIO_AUTENTICADO = {};
+// // faz login, se não conseguir retorna um erro explicando a falha
+// export async function FazerLogin(login, senha) {
+//   try {
+//     const userCredential = await signInWithEmailAndPassword(auth, login, senha);
+//     const user = userCredential.user;
+//     console.log("Usuário logado:", user.uid);
 
-  const senhaCriptografada = criptograrSenha(senha);
+//     localStorage.setItem("token", user.uid);
+//     USUARIO_AUTENTICADO = await SelecionarUsuarioPorLogin(login);
+//     return null;
+//   } catch (error) {
+//     console.error("Erro no login:", error.code, error.message);
+//     return error.message;
+//   }
+// }
 
-  if (!(await ChecarSenha(login, senhaCriptografada))) {
-    return "senha inválida";
-  }
+// export function FazerLogout() {
+//   localStorage.removeItem("token");
+//   window.location.reload();
+// }
 
-  localStorage.setItem("token", "token");
-  USUARIO_AUTENTICADO = await SelecionarUsuarioPorLogin(login);
-  return null;
-}
+// export function ChecarAutenticacao() {
+//   if (localStorage.getItem("token") == null) return false;
+//   else return true;
+// }
 
-export function FazerLogout() {
-  localStorage.removeItem("token");
-  window.location.reload();
-}
+// export function GetUsuarioAutenticado() {
+//   return USUARIO_AUTENTICADO;
+// }
 
-export function ChecarAutenticacao() {
-  if (localStorage.getItem("token") == null) return false;
-  else return true;
-}
-
-export function GetUsuarioAutenticado() {
-  return USUARIO_AUTENTICADO;
-}
-
-// metodos privados
-function criptograrSenha(senha) {
-  return senha;
-}
+// // metodos privados
+// function criptograrSenha(senha) {
+//   return senha;
+// }

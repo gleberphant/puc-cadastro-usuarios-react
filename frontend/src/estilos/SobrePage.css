@@ -1,0 +1,58 @@
+.sobre-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: whitesmoke;
+}
+
+.sobre-panel {
+  padding: 10px;
+  border: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sobre-panel span {
+  color: black;
+  margin-bottom: 30px;
+}
+
+.sobre-panel h2 {
+  color: black;
+  margin-bottom: 30px;
+}
+
+.sobre-panel table {
+  color: black;
+  text-align: left;
+  border-style: none;
+}
+
+.sobre-panel table thead {
+  background-color: crimson;
+  padding: 10px;
+  text-align: left;
+  border-style: none;
+}
+
+.sobre-panel table td {
+  border: 1px;
+  padding: 10px;
+  border-style: none;
+  padding: 10px;
+}
+
+.sobre-panel button {
+  width: 100px;
+  display: block;
+  margin: 12px auto 0;
+  padding: 10px;
+  cursor: pointer;
+  border-style: none;
+  border-radius: 4px;
+  color: white;
+  background-color: crimson;
+}

@@ -6,9 +6,11 @@ import {
   doc,
   getDoc,
   where,
+  setDoc,
 } from "firebase/firestore";
-import { db } from "../repositorios/firebase.js";
-import {USUARIO_MOCK} from "../repositorios/mock.js"
+import { db, auth } from "../repositorios/firebase.js";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { USUARIO_MOCK } from "../repositorios/mock.js";
 
 export async function ListarUsuarios() {
   const lista = [];
@@ -16,14 +18,13 @@ export async function ListarUsuarios() {
   try {
     const resultado = await getDocs(collection(db, "usuarios"));
     // timeout para simular delay do servidor
-    const sleep = await new Promise((resolve) => setTimeout(resolve, 500));
+    //const sleep = await new Promise((resolve) => setTimeout(resolve, 500));
 
     for (const doc of resultado.docs) {
       const usuario = { id: doc.id, ...doc.data() };
-      console.log("Usuario recebido: ", usuario);
       lista.push(usuario);
     }
-    console.log("Recebendo lista de usuarios: ", lista);
+    console.log("lista : ", lista);
   } catch (e) {
     console.log("error:", e);
     return null;
@@ -34,13 +35,30 @@ export async function ListarUsuarios() {
 
 export async function AdicionarUsuario(novoUsuario) {
   try {
-    const docRef = await addDoc(collection(db, "usuarios"), novoUsuario);
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      novoUsuario.login,
+      novoUsuario.senha,
+    );
+    console.log("Usuario criado no firebase auth: ", userCredential.user.uid);
+
+    const docRef = doc(db, "usuarios", userCredential.user.uid);
+
+    await setDoc(docRef, novoUsuario);
+
     console.log(`Documento salvo : ${docRef.id}`);
   } catch (error) {
-    console.log(`Falha na escrita do error: ${error}`);
+    console.log(`Error: ${error}`);
+    return error;
   }
 
-  USUARIO_MOCK.push(novoUsuario);
+  try {
+  } catch (error) {
+    console.log(`Error: ${error}`);
+    return "erro ao adicionar usuario";
+  }
+
+  return null;
 }
 
 export async function SelecionarUsuarioPorLogin(login) {
