@@ -2,7 +2,7 @@
 import "./estilos/App.css";
 
 //dependencias
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { AutenticacaoMiddleware } from "./intermediarios/AutenticacaoMiddleware";
 import { ProvedorAutenticacao} from "./contextos/ProvedorAutenticacao"
 //paginas das rotas
@@ -17,7 +17,7 @@ import PageSobre from "./paginas/sobre";
 function App() {
   return (
     <ProvedorAutenticacao>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           {/** rotas publica */}
           <Route path="/login" element={<PageLogin />}></Route>
@@ -31,7 +31,7 @@ function App() {
             </Route>
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </ProvedorAutenticacao>
   );
 }
