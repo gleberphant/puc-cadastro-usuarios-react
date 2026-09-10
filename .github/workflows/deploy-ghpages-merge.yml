@@ -30,6 +30,8 @@ jobs:
 
       - name: Gerar build
         working-directory: app-react
+        env:
+          VITE_BASE_PATH: /puc-cadastro-usuarios-react/
         run: npm run build
 
       - name: Configurar Pages
