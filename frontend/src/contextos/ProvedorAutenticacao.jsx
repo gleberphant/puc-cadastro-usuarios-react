@@ -73,7 +73,7 @@ export function ProvedorAutenticacao({ children }) {
       return null;
     } catch (erro) {
       console.error("signInWithEmailAndPassword:", erro);
-      throw new Error("erro na autenticação");
+      throw new Error("Credenciais Inválidas");
     }
   };
 

@@ -22,7 +22,7 @@ export default function PageLogin() {
     try {
       await FazerLogin(login, senha);
     } catch (err) {
-      alert(`Erro: ${err}`);
+      alert(`${err}`);
       return null;
     }
   };
