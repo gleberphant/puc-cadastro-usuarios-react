@@ -23,9 +23,16 @@ export default function PageCadastro() {
       data_nascimento: formulario.get("data_nascimento"),
     };
 
-    await AdicionarUsuario(novoUsuario);
+    const err = await AdicionarUsuario(novoUsuario);
 
-    //form.reset();
+    if (err != null) {
+      alert("Falha no cadastro de usuario ");
+      return;
+    }
+
+    alert("Usuario cadastrado com sucesso");
+
+    form.reset();
   };
 
   return (

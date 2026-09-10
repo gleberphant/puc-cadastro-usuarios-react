@@ -46,16 +46,13 @@ export async function AdicionarUsuario(novoUsuario) {
     await setDoc(docRef, novoUsuario);
 
     console.log(`Documento salvo : ${docRef.id}`);
+
+    
   } catch (error) {
     console.log(`Error: ${error}`);
     return error;
   }
 
-  try {
-  } catch (error) {
-    console.log(`Error: ${error}`);
-    return "erro ao adicionar usuario";
-  }
 
   return null;
 }
