@@ -10,6 +10,16 @@ Desenvolvido por HANDERSON GLEBER (gr4v4t1nh4)
 
 </div>
 
+# Versão em funcionamento
+
+disponível em:
+
+- https://gleberphant.github.io/puc-cadastro-usuarios-react/#/login
+
+ou
+
+- https://pucpr-as2-web.web.app/#/login
+
 # Cadastro de usuários PUCPR
 
 Aplicação de cadastro e consulta de usuários desenvolvida para a atividade somativa do curso de Análise e Desenvolvimento de Sistemas da PUCPR. O projeto possui frontend em React, autenticação por e-mail e senha com Firebase e persistência no Cloud Firestore. O frontend compilado também pode ser executado como aplicação desktop por meio do Wails e Go.
