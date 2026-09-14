@@ -6,67 +6,146 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
 
-Desenvolvido por HANDERSON GLEBER (gr4v4t1nh4) 
-
-
-<p align="center">Gostou do projeto? Por favor considere <a href="http://link.mercadopago.com.br/handersongleber">fazer uma doação</a> para ajudar a melhorá-lo!</p>
+Desenvolvido por HANDERSON GLEBER (gr4v4t1nh4)
 
 </div>
 
+# Cadastro de usuários PUCPR
 
+Aplicação de cadastro e consulta de usuários desenvolvida para a atividade somativa do curso de Análise e Desenvolvimento de Sistemas da PUCPR. O projeto possui frontend em React, autenticação por e-mail e senha com Firebase e persistência no Cloud Firestore. O frontend compilado também pode ser executado como aplicação desktop por meio do Wails e Go.
 
-## 🐙 Descrição
+## Funcionalidades
 
-Atividades práticas da disciplina de `Dev Ops e de Desenvolvimento WEB`, do curso de Análise e Desenvolvimento de Sistemas da PUC PR. 
+- Login com Firebase Authentication.
+- Cadastro com login/e-mail, senha, nome, sobrenome e data de nascimento.
+- Persistência dos dados na coleção `usuarios` do Firestore.
+- Consulta dos usuários cadastrados em tabela.
+- Proteção das rotas privadas por estado de autenticação.
+- Menu com os dados do usuário autenticado e opção de logout.
+- Página Sobre com informações do projeto.
 
-## 💻 Pré-requisitos
+## Rotas
 
-Antes de começar, verifique os requisitos do projeto:
+| Rota        | Acesso  | Descrição              |
+| ----------- | ------- | ---------------------- |
+| `/login`    | Público | Entrada do usuário     |
+| `/`         | Privado | Lista de usuários      |
+| `/cadastro` | Privado | Cadastro de usuário    |
+| `/sobre`    | Privado | Informações do projeto |
 
-- `Golang 1.26.6`
-- `Node 1.24`
+O roteamento usa `HashRouter`, o que permite a execução em hosting estático e no asset server do Wails.
 
-## 🚀 Instalação do projeto
+## Tecnologias
 
+- React 19 e React DOM.
+- React Router DOM 7.
+- Vite 7.
+- Firebase SDK 12: Authentication e Firestore.
+- Go e Wails v2.
 
-### Live Development
+## Estrutura do projeto
 
-To run in live development mode, run `wails dev` in the project directory. This will run a Vite development server that will provide very fast hot reload of your frontend changes. If you want to develop in a browser and have access to your Go methods, there is also a dev server that runs on http://localhost:34115. Connect to this in your browser, and you can call your Go code from devtools.
+```text
+app-react/
+	src/
+		componentes/       Componentes reutilizáveis
+		contextos/         Contexto global de autenticação
+		estilos/           Folhas de estilo
+		intermediarios/    Proteção das rotas privadas
+		paginas/           Páginas da aplicação
+		repositorios/      Inicialização do Firebase e mocks
+		servicos/          Operações de Authentication e Firestore
+	dist/                Build web gerado pelo Vite
+documentacao/          Documentação funcional e técnica
+firebase.json          Configuração do Firebase Hosting e Firestore
+firestore.rules        Regras de acesso ao Firestore
+main.go                Inicialização da aplicação Wails
+wails.json             Configuração do Wails
+```
 
-### Building
+## Pré-requisitos
 
-To build a redistributable, production mode package, use `wails build`.
+- Node.js e npm.
+- Go, para executar ou compilar a aplicação Wails.
+- Wails CLI v2, para o alvo desktop.
+- Firebase CLI autenticado, para deploy e atualização das regras.
 
-## 📫 Contribuindo com o projeto
+## Executar o frontend
 
-Para contribuir com o projeto, siga estas etapas:
+```bash
+cd app-react
+npm install
+npm run dev
+```
 
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
-5. Crie a solicitação de pull.
+Para gerar e visualizar o build web:
 
-Consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+```bash
+npm run build
+npm run preview
+```
 
-## 😄 Autor
+O build é criado em `app-react/dist`.
 
-HANDERSON GLEBER DE LIMA CAVALCANTI (GRAVATINHA)
+## Executar e compilar com Wails
 
-E- mail:  handerson.gleber@gmail.com
+Na raiz do projeto:
 
-https://www.instagram.com/handersongleber/
+```bash
+wails dev
+wails build
+```
 
-## 📝 Licença
+O arquivo `wails.json` automatiza a instalação das dependências e o build do frontend. O diretório `build/` recebe os artefatos da aplicação desktop.
 
-Esse projeto está sob licença livre.
+## Deploy no Firebase Hosting
 
-## 🤝 Apoie o autor
+O hosting está configurado para publicar `app-react/dist` no site Firebase `pucpr-as2-web`:
 
-Se você estiver satisfeito com esse projeto ou  quiser me encorajar a continuar criando coisas legais, considere me apoiar:
+```bash
+firebase login
+firebase use pucpr-as2-web
+cd app-react
+npm run build
+cd ..
+firebase deploy --only hosting
+```
 
-- Dando os devidos créditos caso utilize meu código
-- Dando uma estrela (Starring) e compartilhando o projeto 🚀
-- Me Pagando um café [![Static Badge](https://img.shields.io/badge/Mercado_Livre-blue)]("http://link.mercadopago.com.br/handersongleber") ou  [![paypal](https://img.shields.io/badge/Pay_Pal-blue)]("https://www.paypal.com/donate/?business=GZCPGEVTCZ8VW&no_recurring=0&currency_code=USD")
+Para publicar regras e índices do Firestore:
 
+```bash
+firebase deploy --only firestore:rules,firestore:indexes
+```
 
+O código contém a configuração do hosting, mas não registra uma URL pública validada. A URL deve ser adicionada após a confirmação do deploy.
+
+## Segurança e limitações conhecidas
+
+- A sessão do Firebase usa persistência local no navegador.
+- As rotas privadas são redirecionadas para `/login` quando não há usuário autenticado.
+- A regra atual do Firestore permite leitura e escrita ampla até 29/09/2026 e deve ser substituída antes do uso público.
+- O cadastro atualmente envia o campo `senha` ao Firestore. Essa senha não deve ser persistida; o Firebase Authentication deve ser a única camada responsável por ela.
+- A página principal lista todos os usuários, comportamento que requer revisão caso contenha dados reais.
+- Os formulários ainda não possuem validação detalhada e exibem mensagens com `alert`.
+
+Consulte os documentos em `documentacao/` para os detalhes de funcionalidades, segurança, backend e infraestrutura.
+
+## Entrega
+
+O projeto pode ser distribuído em ZIP sem a pasta `node_modules`, arquivos de log e artefatos desnecessários. O arquivo `app-react/package.json` deve ser mantido para recriar as dependências:
+
+```bash
+cd app-react
+npm install
+```
+
+## Autor
+
+HANDERSON GLEBER DE LIMA CAVALCANTI
+
+- E-mail: handerson.gleber@gmail.com
+- Instagram: https://www.instagram.com/handersongleber/
+
+## Licença
+
+Projeto disponibilizado sob licença livre.
